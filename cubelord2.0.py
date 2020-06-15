@@ -2,8 +2,10 @@
 import random
 
 # Import discord and create client.
-import discord 
+import discord
 from discord.ext import commands
+from discord.ext.commands import has_permissions, MissingPermissions
+
 client = commands.Bot(command_prefix = '+')
 
 # Ensure bot is running.
@@ -47,5 +49,23 @@ async def _8ball(ctx, *, question):
             ]
     await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses)}')
 
+
+# Moderation commands listed below.
+
+# Number 2: Kick command (+kick <user> <reason>)
+@client.command()
+@has_permissions(manage_roles=True, kick_members=True)
+async def kick(ctx, member : discord.Member, *, reason=None):
+        await ctx.send(f'User {member.display_name} has been kicked due to: {reason}')
+        await member.kick(reason=reason)
+
+# Number 3: Ban command (+ban <user> <reason>)
+@client.command()
+@has_permissions(manage_roles=True, ban_members=True)
+async def ban(ctx, member : discord.Member, *, reason=None):
+        await member.ban(reason=reason)
+        await ctx.send(f"User {member.display_name} has been banned due to: {reason}")
+
 # Run the bot.
 client.run('NzE5NzQyNDEyMTg4MDI0OTU0.XubgEw.Ub79PYYmYGDVVVhQKqhdA7hNq3U')
+
