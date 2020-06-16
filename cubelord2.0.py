@@ -56,7 +56,7 @@ async def _8ball(ctx, *, question):
 # Moderation commands listed below.
 
 # Number 0: Return an error message if one arises. 
-@client.event() 
+@client.event
 async def onError(ctx, error): 
     # take care of a missing argument in a command
     if isinstance(error, commands.MissingRequiredArgument): 
