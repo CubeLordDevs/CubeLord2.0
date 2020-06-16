@@ -85,7 +85,21 @@ async def ban(ctx, member: discord.Member, *, reason=None):
     await member.ban(reason=reason)
     await ctx.send(f"User {member.mention} has been banned due to: {reason}.")
 
-# Number 3: Find userID of user
+# Number 3: Unban command (+unban <user> <reason)
+@client.command()
+async def unban(ctx, *, member):
+    banned_users = await ctx.guild.bans()
+    member_name, member_discriminator = member.split('# ')
+
+    for ban_entry in banned_users:
+        user = ban_entry.user
+
+        if(user.name, user.discriminator) == (member_name, member_discriminator):
+            await ctx.guild.unban(user)
+            await ctx.send(f'{user.mention} has been unbanned.')
+            return
+
+# Number 4: Find userID of user
 @client.command()
 async def userid(ctx, user: discord.User):
     id = user.id
