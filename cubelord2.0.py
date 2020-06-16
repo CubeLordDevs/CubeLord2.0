@@ -6,12 +6,15 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
 
-client = commands.Bot(command_prefix = '+')
+client = commands.Bot(command_prefix='+')
 
-# Ensure bot is running.
+
+# Ensure bot is running and set its status.
 @client.event
 async def on_ready():
     print('Ready!')
+    await client.change_presence(status=discord.Status.do_not_disturb, activity=discord.Game('+'))
+
 
 # Ping-pong command.
 @client.command()
@@ -26,46 +29,51 @@ async def ping(ctx):
 async def _8ball(ctx, *, question):
     # Responses for the bot.
     responses = [
-            "It is certain.",
-            "It is decidedly so.",
-            "Without a doubt.",
-            "Yes - definitely.",
-            "You may rely on it.",
-            "As I see it, yes.",
-            "Most likely.",
-            "Outlook good.",
-            "Yes.",
-            "Signs point to yes.",
-            "Reply hazy, try again.",
-            "Ask again later.",
-            "Better not tell you now.",
-            "Cannot predict now.",
-            "Concentrate and ask again.",
-            "Don't count on it.",
-            "My reply is no.",
-            "My sources say no.",
-            "Outlook not so good.",
-            "Very doubtful."
-            ]
+        "It is certain.",
+        "It is decidedly so.",
+        "Without a doubt.",
+        "Yes - definitely.",
+        "You may rely on it.",
+        "As I see it, yes.",
+        "Most likely.",
+        "Outlook good.",
+        "Yes.",
+        "Signs point to yes.",
+        "Reply hazy, try again.",
+        "Ask again later.",
+        "Better not tell you now.",
+        "Cannot predict now.",
+        "Concentrate and ask again.",
+        "Don't count on it.",
+        "My reply is no.",
+        "My sources say no.",
+        "Outlook not so good.",
+        "Very doubtful."
+    ]
     await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses)}')
 
 
 # Moderation commands listed below.
 
-# Number 2: Kick command (+kick <user> <reason>)
+# Number 1: Kick command (+kick <user> <reason>)
 @client.command()
 @has_permissions(manage_roles=True, kick_members=True)
-async def kick(ctx, member : discord.Member, *, reason=None):
-        await ctx.send(f'User {member.display_name} has been kicked due to: {reason}')
-        await member.kick(reason=reason)
+async def kick(ctx, member: discord.Member, *, reason=None):
+    await ctx.send(f'User {member.mention} has been kicked due to: {reason}.')
+    await member.kick(reason=reason)
 
-# Number 3: Ban command (+ban <user> <reason>)
+# Number 2: Ban command (+ban <user> <reason>)
 @client.command()
 @has_permissions(manage_roles=True, ban_members=True)
-async def ban(ctx, member : discord.Member, *, reason=None):
-        await member.ban(reason=reason)
-        await ctx.send(f"User {member.display_name} has been banned due to: {reason}")
+async def ban(ctx, member: discord.Member, *, reason=None):
+    await member.ban(reason=reason)
+    await ctx.send(f"User {member.mention} has been banned due to: {reason}.")
+
+# Number 3: Find userID of user
+@client.command()
+async def userid(ctx, user: discord.User):
+    id = user.id
+    await ctx.send(f"{str(user)}'s User ID is: {id}.")
 
 # Run the bot.
 client.run('NzE5NzQyNDEyMTg4MDI0OTU0.XubgEw.Ub79PYYmYGDVVVhQKqhdA7hNq3U')
-
