@@ -52,7 +52,6 @@ async def _8ball(ctx, *, question):
     ]
     await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses)}')
 
-
 # Moderation commands listed below.
 
 # Number 0: Return an error message if one arises. 
