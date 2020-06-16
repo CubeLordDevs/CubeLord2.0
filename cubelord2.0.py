@@ -57,18 +57,20 @@ async def _8ball(ctx, *, question):
 
 # Number 0: Return an error message if one arises. 
 @client.event
-async def onError(ctx, error): 
+async def on_command_error(ctx, error):
+
     # take care of a missing argument in a command
-    if isinstance(error, commands.MissingRequiredArgument): 
+    if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("Invalid command syntax: Please provide all arguments required.")
     
-    # take care of an invalid argument in a command
-    if isinstance(error, commands.InvalidArgument): 
-        await ctx.send("Invalid argument: Please provide valid arguments.")
+    # take care of an invalid command
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.send("Invalid command: This command does not exist.")
 
     # take care of missing permissions
-    if isinstance(error, commands.MissingPermissions): 
+    if isinstance(error, commands.MissingPermissions):
         await ctx.send("Missing permissions: You do not have permission to do this.")
+
 
 # Number 1: Kick command (+kick <user> <reason>)
 @client.command()
