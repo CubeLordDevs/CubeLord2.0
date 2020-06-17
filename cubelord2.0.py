@@ -19,10 +19,15 @@ async def on_ready():
 # Ping-pong command.
 @client.command()
 async def ping(ctx):
-    await ctx.send(f'Pong! ``` Latency: {round(client.latency * 1000)} milliseconds ``` ')
-
+    embed = discord.Embed(
+    colour = discord.Colour.dark_red(),
+    title = "Ping-Pong Latency Test!",
+    )
+    embed.add_field(name="Results:", value= f'Pong! ```Latency: {round(client.latency * 1000)} milliseconds``` ')
+    await ctx.send(embed=embed)
 
 # Entertainment commands listed below.
+
 
 # Number 1: 8 Ball Command.
 @client.command(aliases=['8ball'])
@@ -50,7 +55,15 @@ async def _8ball(ctx, *, question):
         "Outlook not so good.",
         "Very doubtful."
     ]
-    await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses)}')
+
+    embed = discord.Embed(
+    colour=discord.Colour.dark_red(),
+    title="8Ball!",
+    )
+    embed.add_field(name="Question:", value=f'{question}')
+    embed.add_field(name="Answer:", value=f'{random.choice(responses)}')
+    embed.set_thumbnail(url='https://cdn.discordapp.com/attachments/719228435716636842/722661845101576202/pool-8-ball-emoji-clipart-md.png')
+    await ctx.send(embed=embed)
 
 # Moderation commands listed below.
 
