@@ -15,13 +15,12 @@ async def on_ready():
     print('Ready!')
     await client.change_presence(status=discord.Status.do_not_disturb, activity=discord.Game('+'))
 
-
 # Ping-pong command.
 @client.command()
 async def ping(ctx):
     embed = discord.Embed(
     colour = discord.Colour.dark_red(),
-    title = "Ping-Pong Latency Test!",
+    title = "Ping-Pong Latency Test",
     )
     embed.add_field(name="Results:", value= f'Pong! ```Latency: {round(client.latency * 1000)} milliseconds``` ')
     await ctx.send(embed=embed)
@@ -58,7 +57,7 @@ async def _8ball(ctx, *, question):
 
     embed = discord.Embed(
     colour=discord.Colour.dark_red(),
-    title="8Ball!",
+    title="8Ball",
     )
     embed.add_field(name="Question:", value=f'{question}')
     embed.add_field(name="Answer:", value=f'{random.choice(responses)}')
@@ -73,15 +72,36 @@ async def on_command_error(ctx, error):
 
     # take care of a missing argument in a command
     if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send("Invalid command syntax: Please provide all arguments required.")
-    
+
+        embed = discord.Embed (
+           colour= discord.Colour.dark_red(),
+           title= "Error"
+        )
+        embed.add_field(name="Exception:", value="Invalid command syntax: Please provide all arguments required.")
+        embed.set_thumbnail(url= "https://cdn.discordapp.com/attachments/719228435716636842/722802579641335858/matt-icons_dialog-error.png")
+        await ctx.send(embed=embed)
+
     # take care of an invalid command
     if isinstance(error, commands.CommandNotFound):
-        await ctx.send("Invalid command: This command does not exist.")
+
+        embed = discord.Embed(
+            colour=discord.Colour.dark_red(),
+            title="Error"
+        )
+        embed.add_field(name="Exception:", value="Invalid command: This command does not exist.")
+        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/719228435716636842/722802579641335858/matt-icons_dialog-error.png")
+        await ctx.send(embed=embed)
 
     # take care of missing permissions
     if isinstance(error, commands.MissingPermissions):
-        await ctx.send("Missing permissions: You do not have permission to do this.")
+        embed = discord.Embed(
+            colour=discord.Colour.dark_red(),
+            title="Error"
+        )
+        embed.add_field(name="Exception:", value="Missing permissions: You do not have permission to do this.")
+        embed.set_thumbnail(
+        url="https://cdn.discordapp.com/attachments/719228435716636842/722802579641335858/matt-icons_dialog-error.png")
+        await ctx.send(embed=embed)
 
 
 # Number 1: Kick command (+kick <user> <reason>)
