@@ -179,3 +179,6 @@ async def avatar(ctx, user: discord.User):
 # Run the bot.
 # Note: Store token in external file later for security reasons
 client.run('NzE5NzQyNDEyMTg4MDI0OTU0.XubgEw.Ub79PYYmYGDVVVhQKqhdA7hNq3U')
+
+
+
