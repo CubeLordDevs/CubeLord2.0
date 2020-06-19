@@ -14,7 +14,7 @@ client = commands.Bot(command_prefix='+')
 @client.event
 async def on_ready():
     print('Ready!')
-    await client.change_presence(status=discord.Status.do_not_disturb, activity=discord.Game('+'))
+    await client.change_presence(status=discord.Status.do_not_disturb, activity=discord.Game('+help/+info'))
 
 
 # Miscellaneous commands and events listed below.
@@ -93,6 +93,7 @@ async def info(ctx):
                     value=f"CubeLord2.0 is a 50/50 moderation/entertainment bot created by using discord.py! To see the bot's commands, type **+help**.")
     embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
                      icon_url=client.user.avatar_url)
+    embed.set_thumbnail(url=client.user.avatar_url)
     await ctx.send(embed=embed)
 
 
@@ -155,7 +156,7 @@ async def funfact(ctx):
         "Back when dinosaurs existed, there used to be volcanoes that were erupting on the moon!",
         "The only letter that doesn’t appear on the periodic table is J!",
         "If a Polar Bear and a Grizzly Bear mate, their offspring is called a “Pizzy Bear”!",
-        "In 2006, a Coca-Cola employee offered to sell Coca-Cola secrets to Pepsi.Pepsi responded by notifying Coca-Cola!",
+        "In 2006, a Coca-Cola employee offered to sell Coca-Cola secrets to Pepsi. Pepsi responded by notifying Coca-Cola!",
 
     ]
 
