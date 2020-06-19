@@ -27,6 +27,8 @@ async def ping(ctx):
         title="Ping-Pong Latency Test",
     )
     embed.add_field(name="Results:", value=f'Pong! ```Latency: {round(client.latency * 1000)} milliseconds``` ')
+    embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
+                     icon_url=client.user.avatar_url)
 
     await ctx.send(embed=embed)
 
@@ -44,6 +46,8 @@ async def on_command_error(ctx, error):
         embed.set_thumbnail(
             url="https://cdn.discordapp.com/attachments/719228435716636842/722802579641335858/matt-icons_dialog-error"
                 ".png")
+        embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
+                         icon_url=client.user.avatar_url)
 
         await ctx.send(embed=embed)
 
@@ -57,6 +61,8 @@ async def on_command_error(ctx, error):
         embed.set_thumbnail(
             url="https://cdn.discordapp.com/attachments/719228435716636842/722802579641335858/matt-icons_dialog-error"
                 ".png")
+        embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
+                         icon_url=client.user.avatar_url)
 
         await ctx.send(embed=embed)
 
@@ -70,8 +76,23 @@ async def on_command_error(ctx, error):
         embed.set_thumbnail(
             url="https://cdn.discordapp.com/attachments/719228435716636842/722802579641335858/matt-icons_dialog-error"
                 ".png")
+        embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
+                         icon_url=client.user.avatar_url)
+
         await ctx.send(embed=embed)
 
+
+# Miscellaneous Command #3: Info Command (+info).
+@client.command()
+async def info(ctx):
+    embed = discord.Embed(
+        colour=discord.Colour.green(),
+        title="About CubeLord2.0"
+    )
+    embed.add_field(name="Description:", value=f"CubeLord2.0 is a 50/50 moderation/entertainment bot created by using discord.py! To see the bot's commands, type **+help**.")
+    embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
+                     icon_url=client.user.avatar_url)
+    await ctx.send(embed=embed)
 
 # Entertainment commands listed below.
 
@@ -108,6 +129,8 @@ async def _8ball(ctx, *, question):
     )
     embed.add_field(name="Question:", value=f'{question}')
     embed.add_field(name="Answer:", value=f'{random.choice(responses)}')
+    embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
+                     icon_url=client.user.avatar_url)
     embed.set_thumbnail(
         url='https://cdn.discordapp.com/attachments/719228435716636842/722661845101576202/pool-8-ball-emoji-clipart'
             '-md.png')
@@ -126,6 +149,8 @@ async def kick(ctx, member: discord.Member, *, reason=None):
         title="Kick Successful!"
     )
     embed.add_field(name="Results:", value=f'User {member.mention} has been kicked due to: {reason}.')
+    embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
+                     icon_url=client.user.avatar_url)
 
     await member.kick(reason=reason)
     await ctx.send(embed=embed)
@@ -140,13 +165,16 @@ async def ban(ctx, member: discord.Member, *, reason=None):
         title="Ban Successful!"
     )
     embed.add_field(name="Results:", value=f"User {member.mention} has been banned due to: {reason}.")
+    embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
+                     icon_url=client.user.avatar_url)
 
     await member.ban(reason=reason)
     await ctx.send(embed=embed)
 
 
-# Moderation Command #3: Unban Command (+unban <user> <reason>).
+# Moderation Command #3: Unban Command (+unban <user>).
 @client.command()
+@has_permissions(manage_roles=True, ban_members=True)
 async def unban(ctx, *, member):
     banned_users = await ctx.guild.bans()
     member_name, member_discriminator = member.split('#')
@@ -160,6 +188,8 @@ async def unban(ctx, *, member):
                 title="Unban Successful!"
             )
             embed.add_field(name="Results", value=f'User{user.mention} has been unbanned.')
+            embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
+                             icon_url=client.user.avatar_url)
 
             await ctx.guild.unban(user)
             await ctx.send(embed=embed)
@@ -176,6 +206,8 @@ async def userid(ctx, user: discord.User):
     )
     embed.add_field(name=f"ID: ", value=f"{str(user)}'s User ID is: **{userID}**.")
     embed.set_thumbnail(url=user.avatar_url)
+    embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
+                     icon_url=client.user.avatar_url)
 
     await ctx.send(embed=embed)
 
@@ -190,6 +222,8 @@ async def avatar(ctx, user: discord.User):
     )
     embed.add_field(name=f"{user.display_name}'s Avatar", value=f"This is {user.display_name}'s Avatar:")
     embed.set_image(url=avatar)
+    embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
+                     icon_url=client.user.avatar_url)
 
     await ctx.send(embed=embed)
 
