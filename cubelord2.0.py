@@ -6,6 +6,14 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
 
+# Import Discord-Reddit library
+import praw
+
+# Initialize Reddit hook.
+reddit = praw.Reddit(client_id='lFuFwceN0o_b9w',
+                     client_secret='asLLFB4ycCr927RIcvR_CSr4GBs',
+                     user_agent="discord:CubeLord2.0:1.00:(by u/Dodesimo")
+
 # Set prefix.
 client = commands.Bot(command_prefix='+')
 
@@ -34,6 +42,7 @@ async def ping(ctx):
 
 
 # Miscellaneous Event #2: Error Messages.
+
 @client.event
 async def on_command_error(ctx, error):
     # "MissingRequiredArgument" exception error message.
@@ -166,6 +175,17 @@ async def funfact(ctx):
 
     await ctx.send(embed=embed)
 
+
+# Entertainment Command #3: Find Memes (using Reddit webhook) <+meme>
+@client.command()
+async def meme(ctx):
+
+    memes_submissions = reddit.subreddit('memes').hot()
+    post_to_pick = random.randint(1, 10)
+    for i in range(0, post_to_pick):
+        submission = next(x for x in memes_submissions if not x.stickied)
+
+    await ctx.send(submission.url)
 
 # Moderation commands listed below.
 
