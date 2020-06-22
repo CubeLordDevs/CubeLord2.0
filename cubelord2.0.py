@@ -1,4 +1,5 @@
 # Import Python packages
+import asyncio
 import random
 
 # Import discord and create client.
@@ -42,6 +43,7 @@ async def ping(ctx):
 
 
 # Miscellaneous Event #2: Error Messages.
+
 
 @client.event
 async def on_command_error(ctx, error):
@@ -103,6 +105,7 @@ async def info(ctx):
     embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
                      icon_url=client.user.avatar_url)
     embed.set_thumbnail(url=client.user.avatar_url)
+
     await ctx.send(embed=embed)
 
 
@@ -176,16 +179,42 @@ async def funfact(ctx):
     await ctx.send(embed=embed)
 
 
-# Entertainment Command #3: Find Memes (using Reddit webhook) <+meme>
+# Entertainment Command #3: Find Memes (using Reddit webhook) (<+meme> <subreddit name>)
 @client.command()
-async def meme(ctx):
+async def meme(ctx, sr):
+    memes_submissions = reddit.subreddit(sr).hot()
+    post_to_pick = random.randint(1, 100)
 
-    memes_submissions = reddit.subreddit('memes').hot()
-    post_to_pick = random.randint(1, 10)
     for i in range(0, post_to_pick):
         submission = next(x for x in memes_submissions if not x.stickied)
 
-    await ctx.send(submission.url)
+    if submission.over_18:
+        embed = discord.Embed (
+
+            colour=discord.Colour.green(),
+            title="Notice"
+        )
+        embed.add_field(name="Description:", value="This submission is NSFW. Please get a meme from another subreddit.")
+        embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
+                         icon_url=client.user.avatar_url)
+
+        await ctx.send(embed=embed)
+
+    elif not submission.over_18:
+        embed = discord.Embed (
+            colour=discord.Colour.green(),
+            title=submission.title
+            )
+
+        embed.add_field(name=f"Author:", value=f"**{str(submission.author)}**")
+        embed.set_image(url=submission.url)
+        embed.add_field(name="From:", value=f"**r/{str(submission.subreddit)}**")
+        embed.add_field(name= "Upvotes:", value = f"**{str(submission.score)}**")
+        embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
+                     icon_url=client.user.avatar_url)
+
+        await ctx.send(embed=embed)
+
 
 # Moderation commands listed below.
 
@@ -264,15 +293,16 @@ async def userid(ctx, user: discord.User):
 # Moderation Command #5: Display Avatar Command (+avatar <user>).
 @client.command()
 async def avatar(ctx, user: discord.User):
+
     avatar = user.avatar_url
     embed = discord.Embed(
         colour=discord.Colour.green(),
         title=f"Avatar Lookup"
-    )
+     )
     embed.add_field(name=f"Avatar:", value=f"**This is {user.mention}'s Avatar:**")
     embed.set_image(url=avatar)
     embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
-                     icon_url=client.user.avatar_url)
+                    icon_url=client.user.avatar_url)
 
     await ctx.send(embed=embed)
 
