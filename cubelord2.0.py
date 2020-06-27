@@ -6,7 +6,7 @@ import random
 import discord
 from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
-
+    
 # Import Discord-Reddit library
 import praw
 
