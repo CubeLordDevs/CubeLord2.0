@@ -6,7 +6,7 @@ import random
 import discord
 from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
-    
+
 # Import Discord-Reddit library
 import praw
 
@@ -214,6 +214,13 @@ async def meme(ctx, sr):
                      icon_url=client.user.avatar_url)
 
         await ctx.send(embed=embed)
+
+
+# Entertainment Command #4: Rock-Paper-Scissors Game (<+rps>)
+@client.command()
+async def rps(ctx):
+
+    await ctx.send("lorem ipsum")
 
 
 # Moderation commands listed below.
