@@ -17,13 +17,11 @@ reddit = praw.Reddit(client_id='lFuFwceN0o_b9w',
 # Set prefix.
 client = commands.Bot(command_prefix='+')
 
-
 # Ensure bot is running and set its status.
 @client.event
 async def on_ready():
     print('Ready!')
     await client.change_presence(status=discord.Status.do_not_disturb, activity=discord.Game('+help/+info'))
-
 
 # Miscellaneous commands and events listed below.
 
@@ -40,10 +38,8 @@ async def ping(ctx):
 
     await ctx.send(embed=embed)
 
-
 # Miscellaneous Event #2: Error Messages.
 
-'''
 @client.event
 async def on_command_error(ctx, error):
     # "MissingRequiredArgument" exception error message.
@@ -91,9 +87,6 @@ async def on_command_error(ctx, error):
 
         await ctx.send(embed=embed)
 
-'''
-
-
 # Miscellaneous Command #3: Info Command (+info).
 @client.command()
 async def info(ctx):
@@ -108,7 +101,6 @@ async def info(ctx):
     embed.set_thumbnail(url=client.user.avatar_url)
 
     await ctx.send(embed=embed)
-
 
 # Entertainment commands listed below.
 
@@ -153,7 +145,6 @@ async def _8ball(ctx, *, question):
 
     await ctx.send(embed=embed)
 
-
 # Entertainment Command #2: Fun Fact Command (+funfact)
 @client.command()
 async def funfact(ctx):
@@ -178,7 +169,6 @@ async def funfact(ctx):
                      icon_url=client.user.avatar_url)
 
     await ctx.send(embed=embed)
-
 
 # Entertainment Command #3: Find Memes (using Reddit webhook) (<+meme> <subreddit name>)
 @client.command()
@@ -216,100 +206,86 @@ async def meme(ctx, sr):
 
         await ctx.send(embed=embed)
 
-
 # Entertainment Command #4: Rock-Paper-Scissors Game (<+rps> <choice>)
 
 @client.command()
 async def rps(ctx, userChoice):
 
     botChoices = ["rock", "paper", "scissors"]
-
     botChoice = botChoices[random.randint(0,2)]
-
 
     if botChoice == userChoice:
         embed = discord.Embed(
-            colour=discord.Colour.green(),
+            colour=discord.Colour.darker_grey(),
             title="It's a Tie!"
         )
-
         embed.add_field(name="Result:",
                         value=f"Both **{ctx.message.author.mention}** and **CubeLord2.0** played **{str(botChoice)}**.")
 
         await ctx.send(embed=embed)
 
     elif (userChoice == "rock"):
-
         if (botChoice == "paper"):
-
             embed = discord.Embed(
-                colour=discord.Colour.green(),
-                title="You Won! :)"
+                colour=discord.Colour.red(),
+                title="You Lost! :)"
             )
-
             embed.add_field(name="Result:",
-                         value=f"**{ctx.message.author.mention}** beat CubeLord2.0! **({str(userChoice)} vs {str(botChoice)})**")
+                        value=f"CubeLord2.0 beat **{ctx.message.author.mention}**! **({str(botChoice)} vs {str(userChoice)})**")
+
             await ctx.send(embed=embed)
-        else:
 
+        else:
             embed = discord.Embed(
                 colour=discord.Colour.green(),
-                title="You Lost! :("
+                title="You Won! :("
             )
+            embed.add_field(name="Result:", value=f"**{ctx.message.author.mention}** beat CubeLord2.0! **({str(userChoice)} vs {str(botChoice)})**")
 
-            embed.add_field(name="Result:",
-                            value=f"CubeLord2.0 beat **{ctx.message.author.mention}**! **({str(userChoice)} vs {str(botChoice)})**")
             await ctx.send(embed=embed)
 
     elif (userChoice == "paper"):
-
         if (botChoice == "scissors"):
-
             embed = discord.Embed(
-                colour=discord.Colour.green(),
-                title="You Won! :)"
+                colour=discord.Colour.red(),
+                title="You Lost! :)"
             )
 
             embed.add_field(name="Result:",
-                            value=f"**{ctx.message.author.mention}** beat CubeLord2.0! **({str(userChoice)} vs {str(botChoice)})**")
+                            value=f"CubeLord2.0 beat **{ctx.message.author.mention}**! **({str(botChoice)} vs {str(userChoice)})**")
+
             await ctx.send(embed=embed)
 
         else:
-
             embed = discord.Embed(
                 colour=discord.Colour.green(),
-                title="You Lost! :("
+                title="You Won! :("
             )
-
             embed.add_field(name="Result:",
-                            value=f"CubeLord2.0 beat **{ctx.message.author.mention}**! **({str(userChoice)} vs {str(botChoice)})**")
+                            value=f"**{ctx.message.author.mention}** beat CubeLord2.0! **({str(userChoice)} vs {str(botChoice)})**")
+
             await ctx.send(embed=embed)
 
     elif (userChoice == "scissors"):
-
         if (botChoice == "rock"):
-
             embed = discord.Embed(
-                colour=discord.Colour.green(),
-                title="You Won! :)"
+                colour=discord.Colour.red(),
+                title="You Lost! :)"
             )
-
             embed.add_field(name="Result:",
-                            value=f"**{ctx.message.author.mention}** beat CubeLord2.0! **({str(userChoice)} vs {str(botChoice)})**")
+                            value=f"CubeLord2.0 beat **{ctx.message.author.mention}**! **({str(botChoice)} vs {str(userChoice)})**")
+
             await ctx.send(embed=embed)
 
         else:
-
             embed = discord.Embed(
                 colour=discord.Colour.green(),
-                title="You Lost! :("
+                title="You Won! :("
             )
-
             embed.add_field(name="Result:",
-                            value=f"CubeLord2.0 beat **{ctx.message.author.mention}**! **({str(userChoice)} vs {str(botChoice)})**")
+                            value=f"**{ctx.message.author.mention}** beat CubeLord2.0! **({str(userChoice)} vs {str(botChoice)})**")
+
             await ctx.send(embed=embed)
-
-
 
 # Moderation commands listed below.
 
@@ -327,7 +303,6 @@ async def kick(ctx, member: discord.Member, *, reason=None):
 
     await member.kick(reason=reason)
     await ctx.send(embed=embed)
-
 
 # Moderation Command #2: Ban Command (+ban <user> <reason>).
 @client.command()
@@ -399,7 +374,6 @@ async def avatar(ctx, user: discord.User):
                      icon_url=client.user.avatar_url)
 
     await ctx.send(embed=embed)
-
 
 # Run the bot.
 # Note: Store token in external file later for security reasons.
