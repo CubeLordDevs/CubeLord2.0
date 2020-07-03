@@ -5,14 +5,14 @@
 Created by Dodesimo#0167 and Redapple8787#2399. 
 
 **ENTERTAINMENT FEATURES**
-- Reddit webhook to grab Reddit posts (r/programmerhumor)
-- Rock Paper Scissors game 
-- Legitimate Magic 8 Ball 
-- Fun facts when you need fun
+- Reddit webhook to grab Reddit posts (r/programmerhumor) (+meme <name of subreddit>)
+- Rock Paper Scissors game (+rps <choice> (either rock, paper, or scissors))
+- Legitimate Magic 8 Ball (+8ball <question to be asked>)
+- Fun facts when you need fun (+funfact)
 
 **MODERATION FEATURES**
-- User ID command
-- Kick and Ban
+- User ID command (+userid <target>)
+- Kick and Ban (+kick <target> or +ban <target>)
 
 **PLANNED FEATURES**
 - Warn command
