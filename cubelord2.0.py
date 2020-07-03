@@ -214,7 +214,27 @@ async def rps(ctx, userChoice):
     botChoices = ["rock", "paper", "scissors"]
     botChoice = botChoices[random.randint(0,2)]
 
-    if botChoice == userChoice:
+    async def win():
+        embed = discord.Embed(
+            colour=discord.Colour.green(),
+            title="You Won! :("
+        )
+        embed.add_field(name="Result:",
+                        value=f"**{ctx.message.author.mention}** beat CubeLord2.0! **({str(userChoice)} vs {str(botChoice)})**")
+
+        await ctx.send(embed=embed)
+
+    async def loss():
+        embed = discord.Embed(
+            colour=discord.Colour.red(),
+            title="You Lost! :)"
+        )
+        embed.add_field(name="Result:",
+                        value=f"CubeLord2.0 beat **{ctx.message.author.mention}**! **({str(botChoice)} vs {str(userChoice)})**")
+
+        await ctx.send(embed=embed)
+
+    async def tie():
         embed = discord.Embed(
             colour=discord.Colour.darker_grey(),
             title="It's a Tie!"
@@ -224,68 +244,23 @@ async def rps(ctx, userChoice):
 
         await ctx.send(embed=embed)
 
-    elif (userChoice == "rock"):
-        if (botChoice == "paper"):
-            embed = discord.Embed(
-                colour=discord.Colour.red(),
-                title="You Lost! :)"
-            )
-            embed.add_field(name="Result:",
-                        value=f"CubeLord2.0 beat **{ctx.message.author.mention}**! **({str(botChoice)} vs {str(userChoice)})**")
-
-            await ctx.send(embed=embed)
-
+    if botChoice == userChoice:
+        await tie()
+    elif userChoice == "rock":
+        if botChoice == "paper":
+            await loss()
         else:
-            embed = discord.Embed(
-                colour=discord.Colour.green(),
-                title="You Won! :("
-            )
-            embed.add_field(name="Result:", value=f"**{ctx.message.author.mention}** beat CubeLord2.0! **({str(userChoice)} vs {str(botChoice)})**")
-
-            await ctx.send(embed=embed)
-
-    elif (userChoice == "paper"):
-        if (botChoice == "scissors"):
-            embed = discord.Embed(
-                colour=discord.Colour.red(),
-                title="You Lost! :)"
-            )
-
-            embed.add_field(name="Result:",
-                            value=f"CubeLord2.0 beat **{ctx.message.author.mention}**! **({str(botChoice)} vs {str(userChoice)})**")
-
-            await ctx.send(embed=embed)
-
+            await win()
+    elif userChoice == "paper":
+        if botChoice == "scissors":
+            await loss()
         else:
-            embed = discord.Embed(
-                colour=discord.Colour.green(),
-                title="You Won! :("
-            )
-            embed.add_field(name="Result:",
-                            value=f"**{ctx.message.author.mention}** beat CubeLord2.0! **({str(userChoice)} vs {str(botChoice)})**")
-
-            await ctx.send(embed=embed)
-
-    elif (userChoice == "scissors"):
-        if (botChoice == "rock"):
-            embed = discord.Embed(
-                colour=discord.Colour.red(),
-                title="You Lost! :)"
-            )
-            embed.add_field(name="Result:",
-                            value=f"CubeLord2.0 beat **{ctx.message.author.mention}**! **({str(botChoice)} vs {str(userChoice)})**")
-
-            await ctx.send(embed=embed)
-
+            await win()
+    elif userChoice == "scissors":
+        if botChoice == "rock":
+            await loss()
         else:
-            embed = discord.Embed(
-                colour=discord.Colour.green(),
-                title="You Won! :("
-            )
-            embed.add_field(name="Result:",
-                            value=f"**{ctx.message.author.mention}** beat CubeLord2.0! **({str(userChoice)} vs {str(botChoice)})**")
-
-            await ctx.send(embed=embed)
+            await win()
 
 # Moderation commands listed below.
 
