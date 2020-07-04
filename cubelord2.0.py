@@ -13,7 +13,6 @@ import praw
 import secretStuff
 
 # Initialize Reddit hook.
-config-file-update-security
 reddit = praw.Reddit(client_id=secretStuff.secretStuff["client_id"],
                      client_secret=secretStuff.secretStuff["client_secret"],
                      user_agent=secretStuff.secretStuff["user_agent"])
@@ -355,5 +354,4 @@ async def avatar(ctx, user: discord.User):
 
 # Run the bot.
 # Note: Store token in external file later for security reasons.
-config-file-update-security
 client.run(secretStuff.secretStuff["token"])
