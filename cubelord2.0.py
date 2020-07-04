@@ -11,14 +11,12 @@ from discord.ext.commands import has_permissions, MissingPermissions
 import praw
 
 # import secretStuff.py file
-import secretStuff 
-
-print(secretStuff.theStuff["botToken"])
+import secretStuff
 
 # Initialize Reddit hook.
-reddit = praw.Reddit(client_id='lFuFwceN0o_b9w',
-                     client_secret='asLLFB4ycCr927RIcvR_CSr4GBs',
-                     user_agent="discord:CubeLord2.0:1.00:(by u/Dodesimo")
+reddit = praw.Reddit(client_id=secretStuff.secretStuff["client_id"],
+                     client_secret=secretStuff.secretStuff["client_secret"],
+                     user_agent=secretStuff.secretStuff["user_agent"])
 
 # Set prefix.
 client = commands.Bot(command_prefix='+')
@@ -314,4 +312,4 @@ async def avatar(ctx, user: discord.User):
 
 # Run the bot.
 # Note: Store token in external file later for security reasons.
-client.run('NzE5NzQyNDEyMTg4MDI0OTU0.XubgEw.Ub79PYYmYGDVVVhQKqhdA7hNq3U')
+client.run(secretStuff.secretStuff["token"])
