@@ -10,6 +10,11 @@ from discord.ext.commands import has_permissions, MissingPermissions
 # Import Discord-Reddit library
 import praw
 
+# import secretStuff.py file
+import secretStuff 
+
+print(secretStuff.theStuff["botToken"])
+
 # Initialize Reddit hook.
 reddit = praw.Reddit(client_id='lFuFwceN0o_b9w',
                      client_secret='asLLFB4ycCr927RIcvR_CSr4GBs',
