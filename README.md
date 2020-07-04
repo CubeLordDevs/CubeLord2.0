@@ -5,8 +5,8 @@
 Created by Dodesimo#0167 and Redapple8787#2399. 
 
 **ENTERTAINMENT FEATURES**
-- Reddit webhook to grab Reddit posts (r/programmerhumor) (+meme <name of subreddit>)
-- Rock Paper Scissors game (+rps <choice> (either rock, paper, or scissors) )
+- Reddit webhook to grab Reddit posts (+meme <name of subreddit>)
+- Rock Paper Scissors game (+rps <choice>)
 - Legitimate Magic 8 Ball (+8ball <question to be asked>)
 - Fun facts when you need fun (+funfact)
 
