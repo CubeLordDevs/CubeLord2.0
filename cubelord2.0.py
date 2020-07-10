@@ -89,6 +89,23 @@ async def on_command_error(ctx, error):
 
         await ctx.send(embed=embed)
 
+    # "Command Invoke Error" exception error message (for subreddit not found).
+    if isinstance(error, commands.errors.CommandInvokeError):
+        embed = discord.Embed(
+            colour=discord.Colour.dark_red(),
+            title="Error"
+        )
+        embed.add_field(name="Exception:", value=f"**Subreddit error: Subreddit not found.**")
+        embed.set_thumbnail(
+            url="https://cdn.discordapp.com/attachments/719228435716636842/722802579641335858/matt-icons_dialog-error"
+                ".png")
+        embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
+                         icon_url=client.user.avatar_url)
+
+        await ctx.send(embed=embed)
+
+
+
 # Miscellaneous Command #3: Info Command (+info).
 @client.command()
 async def info(ctx):
