@@ -17,4 +17,4 @@ Created by Dodesimo#0167 and Redapple8787#2399.
 **PLANNED FEATURES**
 - Warn command
 - Moderation history search
-- NSFW/Profanity/Spam filter
+- NSFW/Profanity/Spam filter for messages
