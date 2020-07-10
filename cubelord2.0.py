@@ -19,11 +19,13 @@ reddit = praw.Reddit(client_id=secretStuff.secretStuff["client_id"],
 # Set prefix.
 client = commands.Bot(command_prefix='+')
 
+
 # Ensure bot is running and set its status.
 @client.event
 async def on_ready():
     print('Ready!')
     await client.change_presence(status=discord.Status.do_not_disturb, activity=discord.Game('+help/+info'))
+
 
 # Miscellaneous commands and events listed below.
 
@@ -39,6 +41,7 @@ async def ping(ctx):
                      icon_url=client.user.avatar_url)
 
     await ctx.send(embed=embed)
+
 
 # Miscellaneous Event #2: Error Messages.
 
@@ -105,7 +108,6 @@ async def on_command_error(ctx, error):
         await ctx.send(embed=embed)
 
 
-
 # Miscellaneous Command #3: Info Command (+info).
 @client.command()
 async def info(ctx):
@@ -120,6 +122,7 @@ async def info(ctx):
     embed.set_thumbnail(url=client.user.avatar_url)
 
     await ctx.send(embed=embed)
+
 
 # Entertainment commands listed below.
 
@@ -164,6 +167,7 @@ async def _8ball(ctx, *, question):
 
     await ctx.send(embed=embed)
 
+
 # Entertainment Command #2: Fun Fact Command (+funfact)
 @client.command()
 async def funfact(ctx):
@@ -188,6 +192,7 @@ async def funfact(ctx):
                      icon_url=client.user.avatar_url)
 
     await ctx.send(embed=embed)
+
 
 # Entertainment Command #3: Find Memes (using Reddit webhook) (<+meme> <subreddit name>)
 @client.command()
@@ -225,13 +230,13 @@ async def meme(ctx, sr):
 
         await ctx.send(embed=embed)
 
+
 # Entertainment Command #4: Rock-Paper-Scissors Game (<+rps> <choice>)
 
 @client.command()
 async def rps(ctx, userChoice):
-
     botChoices = ["rock", "paper", "scissors"]
-    botChoice = botChoices[random.randint(0,2)]
+    botChoice = botChoices[random.randint(0, 2)]
 
     async def win():
         embed = discord.Embed(
@@ -281,6 +286,7 @@ async def rps(ctx, userChoice):
         else:
             await win()
 
+
 # Moderation commands listed below.
 
 # Moderation Command #1: Kick Command (+kick <user> <reason>).
@@ -297,6 +303,7 @@ async def kick(ctx, member: discord.Member, *, reason=None):
 
     await member.kick(reason=reason)
     await ctx.send(embed=embed)
+
 
 # Moderation Command #2: Ban Command (+ban <user> <reason>).
 @client.command()
@@ -357,19 +364,48 @@ async def userid(ctx, user: discord.User):
 # Moderation Command #5: Display Avatar Command (+avatar <user>).
 @client.command()
 async def avatar(ctx, user: discord.User):
-    avatar = user.avatar_url
+    targetAvatar = user.avatar_url
     embed = discord.Embed(
         colour=discord.Colour.green(),
         title=f"Avatar Lookup"
     )
     embed.add_field(name=f"Avatar:", value=f"**This is {user.mention}'s Avatar:**")
-    embed.set_image(url=avatar)
+    embed.set_image(url=targetAvatar)
     embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
                      icon_url=client.user.avatar_url)
 
     await ctx.send(embed=embed)
 
+
+# Moderation Command #6: Warn Command (+warn <user> <reason>)
+@client.command()
+@has_permissions(manage_roles=True, kick_members=True)
+async def warn(ctx, member: discord.Member, *, reason):
+    channel = await member.create_dm()
+
+    dm_embed = discord.Embed(
+        colour=discord.Colour.gold(),
+        title="Warning"
+    )
+    dm_embed.add_field(name="Notice:",
+                       value=f"You have been warned: **{reason}** by **{ctx.message.author}** in **{ctx.message.guild.name}.**")
+    dm_embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
+                        icon_url=client.user.avatar_url)
+    await channel.send(embed=dm_embed)
+
+    guild_dm = discord.Embed(
+
+        colour=discord.Colour.green(),
+        title="Warning Successful!",
+
+    )
+    guild_dm.add_field(name="Results:",
+                       value=f"{member.mention} has been successfully warned! **(Reason: {reason})**")
+    guild_dm.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
+                        icon_url=client.user.avatar_url)
+    await ctx.send(embed=guild_dm)
+
+
 # Run the bot.
 # Note: Store token in external file later for security reasons.
 client.run(secretStuff.secretStuff["token"])
-
