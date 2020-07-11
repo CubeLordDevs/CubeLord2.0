@@ -13,8 +13,8 @@ Created by Dodesimo#0167 and Redapple8787#2399.
 **MODERATION FEATURES**
 - User ID command 
 - Kick and Ban 
+- Warn command (logs will be coming soon!)
 
 **PLANNED FEATURES**
-- Warn command
 - Moderation history search
 - NSFW/Profanity/Spam filter for messages
