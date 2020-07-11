@@ -1,6 +1,6 @@
 **CubeLord 2.0**
 
-*An cool general services bot that includes entertainment and moderation commands. Check out `changelog.md` for new features!*
+*An cool general services bot that includes entertainment and moderation commands. Check out `changelog.md` for new features and the Github wiki for command documentation!*
 
 Created by Dodesimo#0167 and Redapple8787#2399. 
 
