@@ -123,6 +123,21 @@ async def info(ctx):
 
     await ctx.send(embed=embed)
 
+# Miscellaneous Command #4: Vote Command (+vote).
+@client.command()
+async def vote(ctx):
+    embed = discord.Embed(
+        colour=discord.Colour.green(),
+        title="Vote for CubeLord2.0!"
+    )
+    embed.add_field(name="Description:",
+                    value=f"Vote for CubeLord2.0 to make it better using the following **link**: (The link will be posted soon!)")
+    embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
+                     icon_url=client.user.avatar_url)
+    embed.set_thumbnail(url=client.user.avatar_url)
+
+    await ctx.send(embed=embed)
+
 
 # Entertainment commands listed below.
 
@@ -406,6 +421,6 @@ async def warn(ctx, member: discord.Member, *, reason):
     await ctx.send(embed=guild_dm)
 
 
-# Run the bot.
+ # Run the bot.
 # Note: Store token in external file later for security reasons.
 client.run(secretStuff.secretStuff["token"])
