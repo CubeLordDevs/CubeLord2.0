@@ -124,6 +124,19 @@ async def info(ctx):
     await ctx.send(embed=embed)
 
 
+# Miscellaneous Command #4: Help Command (+help).
+@client.command()
+async def assistance(ctx):
+    author = ctx.message.author
+
+    embed = discord.Embed(
+        colour=discord.Colour.green(),
+        title=f"Help",
+        description=f"**CubeLord2.0's commands and features!**"
+    )
+
+    await author.send(embed=embed)
+
 # Entertainment commands listed below.
 
 # Entertainment Command #1: 8 Ball Command (!8ball <question>).
