@@ -36,7 +36,7 @@ async def ping(ctx):
         colour=discord.Colour.green(),
         title="Ping-Pong Latency Test",
     )
-    embed.add_field(name="Results:", value=f'**Pong! ```Latency: {round(client.latency * 1000)} milliseconds```**')
+    embed.add_field(name="Results:", value=f'Pong! **```Latency: {round(client.latency * 1000)} milliseconds```**')
     embed.set_footer(text=f"CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
                      icon_url=client.user.avatar_url)
 
@@ -53,7 +53,7 @@ async def on_command_error(ctx, error):
             colour=discord.Colour.dark_red(),
             title="Error"
         )
-        embed.add_field(name="Exception:", value=f"**Invalid command syntax: Please provide all arguments required.**")
+        embed.add_field(name="Exception:", value=f"Invalid command syntax: Please provide all arguments required.")
         embed.set_thumbnail(
             url="https://cdn.discordapp.com/attachments/719228435716636842/722802579641335858/matt-icons_dialog-error"
                 ".png")
@@ -68,7 +68,7 @@ async def on_command_error(ctx, error):
             colour=discord.Colour.dark_red(),
             title="Error"
         )
-        embed.add_field(name="Exception:", value=f"**Invalid command: This command does not exist.**")
+        embed.add_field(name="Exception:", value=f"Invalid command: This command does not exist.")
         embed.set_thumbnail(
             url="https://cdn.discordapp.com/attachments/719228435716636842/722802579641335858/matt-icons_dialog-error"
                 ".png")
@@ -83,7 +83,7 @@ async def on_command_error(ctx, error):
             colour=discord.Colour.dark_red(),
             title="Error"
         )
-        embed.add_field(name="Exception:", value=f"**Missing permissions: You do not have permission to do this.**")
+        embed.add_field(name="Exception:", value=f"Missing permissions: You do not have permission to do this.")
         embed.set_thumbnail(
             url="https://cdn.discordapp.com/attachments/719228435716636842/722802579641335858/matt-icons_dialog-error"
                 ".png")
@@ -98,7 +98,7 @@ async def on_command_error(ctx, error):
             colour=discord.Colour.dark_red(),
             title="Error"
         )
-        embed.add_field(name="Exception:", value=f"**Subreddit error: Subreddit not found.**")
+        embed.add_field(name="Exception:", value=f"Subreddit error: Subreddit not found.")
         embed.set_thumbnail(
             url="https://cdn.discordapp.com/attachments/719228435716636842/722802579641335858/matt-icons_dialog-error"
                 ".png")
@@ -157,8 +157,8 @@ async def _8ball(ctx, *, question):
         colour=discord.Colour.green(),
         title="8Ball",
     )
-    embed.add_field(name="Question:", value=f'**{question}**')
-    embed.add_field(name="Answer:", value=f'**{random.choice(responses)}**')
+    embed.add_field(name="Question:", value=f'{question}')
+    embed.add_field(name="Answer:", value=f'{random.choice(responses)}')
     embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
                      icon_url=client.user.avatar_url)
     embed.set_thumbnail(
@@ -187,7 +187,7 @@ async def funfact(ctx):
 
     ]
 
-    embed.add_field(name="Did you know that...", value=f'**{random.choice(facts)}**')
+    embed.add_field(name="Did you know that...", value=f'{random.choice(facts)}')
     embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
                      icon_url=client.user.avatar_url)
 
@@ -297,7 +297,7 @@ async def kick(ctx, member: discord.Member, *, reason=None):
         colour=discord.Colour.green(),
         title="Kick Successful!"
     )
-    embed.add_field(name="Results:", value=f'**User {member.mention} has been kicked due to: {reason}.**')
+    embed.add_field(name="Results:", value=f'User {member.mention} has been kicked due to: **{reason}.**')
     embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
                      icon_url=client.user.avatar_url)
 
@@ -313,7 +313,7 @@ async def ban(ctx, member: discord.Member, *, reason=None):
         colour=discord.Colour.green(),
         title="Ban Successful!"
     )
-    embed.add_field(name="Results:", value=f"**User {member.mention} has been banned due to: {reason}.**")
+    embed.add_field(name="Results:", value=f"User {member.mention} has been banned due to: **{reason}.**")
     embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
                      icon_url=client.user.avatar_url)
 
@@ -336,7 +336,7 @@ async def unban(ctx, *, member):
                 colour=discord.Colour.green(),
                 title="Unban Successful!"
             )
-            embed.add_field(name="Results", value=f'**User{user.mention} has been unbanned.**')
+            embed.add_field(name="Results", value=f'User{user.mention} has been unbanned.')
             embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
                              icon_url=client.user.avatar_url)
 
@@ -369,7 +369,7 @@ async def avatar(ctx, user: discord.User):
         colour=discord.Colour.green(),
         title=f"Avatar Lookup"
     )
-    embed.add_field(name=f"Avatar:", value=f"**This is {user.mention}'s Avatar:**")
+    embed.add_field(name=f"Avatar:", value=f"This is {user.mention}'s Avatar:")
     embed.set_image(url=targetAvatar)
     embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
                      icon_url=client.user.avatar_url)
@@ -404,7 +404,6 @@ async def warn(ctx, member: discord.Member, *, reason):
     guild_dm.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
                         icon_url=client.user.avatar_url)
     await ctx.send(embed=guild_dm)
-
 
 # Run the bot.
 # Note: Store token in external file later for security reasons.
