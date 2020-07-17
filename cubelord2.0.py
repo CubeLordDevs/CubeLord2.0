@@ -1,10 +1,17 @@
 # Import Python packages
 import random
+import time
+import asyncio
 
 # Import discord and create client.
 import discord
 from discord.ext import commands
+from better_profanity import profanity
 from discord.ext.commands import has_permissions, MissingPermissions
+
+
+# Load profanity.
+profanity.load_censor_words_from_file("./data/profanity.txt")
 
 # Import Discord-Reddit library
 import praw
@@ -18,14 +25,13 @@ reddit = praw.Reddit(client_id=secretStuff.secretStuff["client_id"],
                      user_agent=secretStuff.secretStuff["user_agent"])
 # Set prefix.
 client = commands.Bot(command_prefix='+')
-
+client.profanityOn = False
 
 # Ensure bot is running and set its status.
 @client.event
 async def on_ready():
     print('Ready!')
     await client.change_presence(status=discord.Status.do_not_disturb, activity=discord.Game('+help/+info'))
-
 
 # Miscellaneous commands and events listed below.
 
@@ -136,6 +142,7 @@ async def assistance(ctx):
     )
 
     await author.send(embed=embed)
+
 
 # Entertainment commands listed below.
 
@@ -417,6 +424,27 @@ async def warn(ctx, member: discord.Member, *, reason):
     guild_dm.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
                         icon_url=client.user.avatar_url)
     await ctx.send(embed=guild_dm)
+
+# Curse word scanner.
+@client.event
+async def on_message(message):
+    if client.profanityOn:
+        if not message.author.bot and profanity.contains_profanity(message.content):
+            await message.delete()
+
+            embed = discord.Embed(
+
+                colour=discord.Colour.green(),
+                title="Notice"
+            )
+            embed.add_field(name="Description:",
+                            value=f"**{message.author.name}**, your message contained profanity. Please refrain from using profanity in **{message.guild.name}**.")
+            embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
+                             icon_url=client.user.avatar_url)
+
+            await message.channel.send(embed=embed, delete_after=4)
+    else:
+        return
 
 # Run the bot.
 # Note: Store token in external file later for security reasons.
