@@ -9,7 +9,6 @@ from discord.ext import commands
 from better_profanity import profanity
 from discord.ext.commands import has_permissions, MissingPermissions
 
-
 # Load profanity.
 profanity.load_censor_words_from_file("./data/profanity.txt")
 
@@ -25,13 +24,15 @@ reddit = praw.Reddit(client_id=secretStuff.secretStuff["client_id"],
                      user_agent=secretStuff.secretStuff["user_agent"])
 # Set prefix.
 client = commands.Bot(command_prefix='+')
-client.profanityOn = False
+client.profanityOn = True
+
 
 # Ensure bot is running and set its status.
 @client.event
 async def on_ready():
     print('Ready!')
     await client.change_presence(status=discord.Status.do_not_disturb, activity=discord.Game('+help/+info'))
+
 
 # Miscellaneous commands and events listed below.
 
@@ -50,7 +51,6 @@ async def ping(ctx):
 
 
 # Miscellaneous Event #2: Error Messages.
-
 @client.event
 async def on_command_error(ctx, error):
     # "MissingRequiredArgument" exception error message.
@@ -128,20 +128,6 @@ async def info(ctx):
     embed.set_thumbnail(url=client.user.avatar_url)
 
     await ctx.send(embed=embed)
-
-
-# Miscellaneous Command #4: Help Command (+help).
-@client.command()
-async def assistance(ctx):
-    author = ctx.message.author
-
-    embed = discord.Embed(
-        colour=discord.Colour.green(),
-        title=f"Help",
-        description=f"**CubeLord2.0's commands and features!**"
-    )
-
-    await author.send(embed=embed)
 
 
 # Entertainment commands listed below.
@@ -411,6 +397,8 @@ async def warn(ctx, member: discord.Member, *, reason):
                        value=f"You have been warned: **{reason}** by **{ctx.message.author}** in **{ctx.message.guild.name}.**")
     dm_embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
                         icon_url=client.user.avatar_url)
+    dm_embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
+                        icon_url=client.user.avatar_url)
     await channel.send(embed=dm_embed)
 
     guild_dm = discord.Embed(
@@ -425,26 +413,50 @@ async def warn(ctx, member: discord.Member, *, reason):
                         icon_url=client.user.avatar_url)
     await ctx.send(embed=guild_dm)
 
+
 # Curse word scanner.
 @client.event
 async def on_message(message):
     if client.profanityOn:
-        if not message.author.bot and profanity.contains_profanity(message.content):
-            await message.delete()
+        if not message.author.bot:
+            if profanity.contains_profanity(message.content):
+                await message.delete()
 
-            embed = discord.Embed(
+                embed = discord.Embed(
 
-                colour=discord.Colour.green(),
-                title="Notice"
-            )
-            embed.add_field(name="Description:",
-                            value=f"**{message.author.name}**, your message contained profanity. Please refrain from using profanity in **{message.guild.name}**.")
-            embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
-                             icon_url=client.user.avatar_url)
+                    colour=discord.Colour.green(),
+                    title="Notice"
+                )
+                embed.add_field(name="Description:",
+                                value=f"**{message.author.name}**, your message contained profanity. Please refrain from using profanity in **{message.guild.name}**.")
+                embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
+                                 icon_url=client.user.avatar_url)
 
-            await message.channel.send(embed=embed, delete_after=4)
-    else:
+                await message.channel.send(embed=embed, delete_after=4)
+
+    elif not client.profanityOn:
         return
+
+    await client.process_commands(message)
+
+
+# Settings Command #1: Profanity filter (+pf <"enable" or "disable">)
+@has_permissions(manage_guild=True)
+@client.command()
+async def pf(ctx, value):
+    if value == "disable":
+        if not client.profanityOn:
+            await ctx.send(f"Profanity filter is already disabled.")
+            return
+        client.profanityOn = False
+        await ctx.send(f"Profanity filter has been disabled.")
+    if value == "enable":
+        if client.profanityOn:
+            await ctx.send(f"Profanity filter is already enabled.")
+            return
+        client.profanityOn = True
+        await ctx.send(f"Profanity filter has been enabled.")
+
 
 # Run the bot.
 # Note: Store token in external file later for security reasons.
