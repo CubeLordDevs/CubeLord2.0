@@ -405,6 +405,22 @@ async def warn(ctx, member: discord.Member, *, reason):
                         icon_url=client.user.avatar_url)
     await ctx.send(embed=guild_dm)
 
+# Moderation Command #7: Mute Command (+mute <member>)
+@client.command()
+async def mute(ctx, member : discord.Member):
+
+    guild = ctx.guild
+
+    role = discord.utils.get(ctx.guild.roles, name="Muted")
+    if role is None:
+        await ctx.send("test")
+        guild.create_role(name="Muted", colour=discord.Colour(0xffffff))
+    else:
+        overwrite = discord.PermissionOverwrite(send_messages = False)
+        for channel in guild.text_channels:
+            await channel.set_permissions(role,overwrite=overwrite)
+        await member.add_roles(role)
+
 # Run the bot.
 # Note: Store token in external file later for security reasons.
 client.run(secretStuff.secretStuff["token"])
