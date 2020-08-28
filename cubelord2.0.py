@@ -116,7 +116,7 @@ async def info(ctx):
         title="About CubeLord2.0"
     )
     embed.add_field(name="Description:",
-                    value=f"CubeLord2.0 is a 50/50 moderation/entertainment bot created by using discord.py! To see the bot's commands, type **+help**.")
+                    value=f"CubeLord2.0 is a 50/50 moderation/entertainment bot serving **{len(client.guilds)} servers** created by using discord.py! To see the bot's commands, type **+help**.")
     embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
                      icon_url=client.user.avatar_url)
     embed.set_thumbnail(url=client.user.avatar_url)
