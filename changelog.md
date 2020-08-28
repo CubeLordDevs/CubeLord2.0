@@ -1,5 +1,8 @@
 **Official Cubelord 2.0 Changelog**
 
+[NEXT RELEASE] *0.1.2* 
+- Added number of servers served to `+info` command
+
 *0.1.1 - 7/10/2020*
 - Basic warn command implemented, DMs the warned person 
 
