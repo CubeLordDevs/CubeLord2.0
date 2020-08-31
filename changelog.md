@@ -1,7 +1,9 @@
 **Official Cubelord 2.0 Changelog**
 
-[NEXT RELEASE] *0.1.2* 
+*0.1.2 - 8/31/2020* 
 - Added number of servers served to `+info` command
+- Added 32 more fun facts to `+funfact` for a total of 38 
+- Cleaner UI
 
 *0.1.1 - 7/10/2020*
 - Basic warn command implemented, DMs the warned person 
