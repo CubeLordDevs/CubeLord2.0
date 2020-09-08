@@ -460,3 +460,4 @@ async def clear(ctx, numberOfMessages):
 # Run the bot.
 # Note: Store token in external file later for security reasons.
 client.run(cubelord.cubelord["token"])
+
