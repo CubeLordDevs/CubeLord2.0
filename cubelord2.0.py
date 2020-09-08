@@ -9,13 +9,13 @@ from discord.ext.commands import has_permissions, MissingPermissions
 # Import Discord-Reddit library
 import praw
 
-# import secretStuff.py file
-import secretStuff
+# import cubelord.py file
+import cubelord
 
 # Initialize Reddit hook.
-reddit = praw.Reddit(client_id=secretStuff.secretStuff["client_id"],
-                     client_secret=secretStuff.secretStuff["client_secret"],
-                     user_agent=secretStuff.secretStuff["user_agent"])
+reddit = praw.Reddit(client_id=cubelord.cubelord["client_id"],
+                     client_secret=cubelord.cubelord["client_secret"],
+                     user_agent=cubelord.cubelord["user_agent"])
 # Set prefix.
 client = commands.Bot(command_prefix='+')
 
@@ -459,4 +459,4 @@ async def clear(ctx, numberOfMessages):
 
 # Run the bot.
 # Note: Store token in external file later for security reasons.
-client.run(secretStuff.secretStuff["token"])
+client.run(cubelord.cubelord["token"])
