@@ -45,6 +45,7 @@ async def ping(ctx):
 
 # Miscellaneous Event #2: Error Messages.
 
+'''
 @client.event
 async def on_command_error(ctx, error):
     # "MissingRequiredArgument" exception error message.
@@ -106,6 +107,7 @@ async def on_command_error(ctx, error):
                          icon_url=client.user.avatar_url)
 
         await ctx.send(embed=embed)
+'''
 
 
 # Miscellaneous Command #3: Info Command (+info).
@@ -190,7 +192,7 @@ async def funfact(ctx):
         "The letter Q does not appear in any US state name.",
         "Armadillo shells are bulletproof.",
         "Most Disney characters wear gloves to keep animation simple.",
-        "The majority of your brain is fat.", 
+        "The majority of your brain is fat.",
         "Too much water can kill you.",
         "You might be drinking water that is older than the solar system.",
         "Moonshiners used 'cow shoes' to disguise their footprints as cow's footprints during Prohibition.",
@@ -246,6 +248,7 @@ async def meme(ctx, sr):
                          icon_url=client.user.avatar_url)
 
         await ctx.send(embed=embed)
+
 
     elif not submission.over_18:
         embed = discord.Embed(
@@ -436,6 +439,23 @@ async def warn(ctx, member: discord.Member, *, reason):
     guild_dm.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
                         icon_url=client.user.avatar_url)
     await ctx.send(embed=guild_dm)
+
+
+# Moderation Command #7: Clear Command (+clear <number of messages>)
+@client.command()
+@has_permissions(manage_messages=True)
+async def clear(ctx, numberOfMessages):
+    await ctx.channel.purge(limit=int(numberOfMessages))
+
+    embed = discord.Embed(
+        colour=discord.Colour.green(),
+        title="Successful!"
+    )
+    embed.add_field(name="Results:", value=f"Successfully deleted **{int(numberOfMessages)}** messages in **{ctx.message.guild.name}**!")
+    embed.set_footer(text="CubeLord2.0: Created by Dodesimo#0176 and Redapple8787#2399.",
+                     icon_url=client.user.avatar_url)
+    await ctx.send(embed=embed, delete_after=5)
+
 
 # Run the bot.
 # Note: Store token in external file later for security reasons.
