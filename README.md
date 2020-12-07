@@ -1,3 +1,5 @@
+**NOTICE: THE CUBELORD DEVELOPERS HAVE DECIDED TO TERMINATE THE CUBELORD 2.0 PROJECT AND RESTART WITH A NEW BOT. INFORMATION AND LINKS FOR THE NEW BOT ARE FORTHCOMING SOON. WE APOLOGISE FOR ANY INCONVENIENCES.** 
+
 **CubeLord 2.0**
 
 *An cool general services bot that includes entertainment and moderation commands. Check out `changelog.md` for new features and the Github wiki for command documentation!*
